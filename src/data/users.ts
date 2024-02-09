@@ -1,10 +1,19 @@
 import { randomUUID } from "node:crypto";
-export let users = [
+
+export type DatabaseUser = {
+  userId: string
+  username: string
+  age:number
+  hobbies: string[]
+}
+
+export let users: DatabaseUser[] = [
   {
     userId: randomUUID(),
     username: "John",
     age: 22,
     hobbies: ["swimming", "playing football"],
+    
   },
   {
     userId: randomUUID(),

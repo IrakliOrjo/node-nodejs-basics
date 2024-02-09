@@ -1,6 +1,6 @@
 import { isValidUUID } from "../utils/isValidUserId";
 
-export function serveRequest(req, res, userId, users) {
+export function serveGetRequest(req, res, userId, users) {
   if (req.url === "/") {
     res.writeHead(200, {
       "Content-Type": "text/plain",
