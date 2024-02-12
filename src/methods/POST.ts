@@ -1,12 +1,17 @@
-import { users } from "../data/users";
-import { DatabaseUser } from "../data/users";
+import { DatabaseUser } from "../data/usersStorageProccess";
 import { IncomingMessage, ServerResponse } from 'http'
 import { isCorrectUserBodyFormat } from "../utils/isCorrectUserBodyFormat";
 import { createNewUSer } from "../utils/createNewUser";
+import cluster from "cluster";
+import { STATUS_CODE, ERROR_MESSAGE } from "../types/types";
 
 
 
-export function servePostRequest(req: IncomingMessage,res: ServerResponse) {
+export function servePostRequest(req: IncomingMessage,res: ServerResponse,users: Record<string, any>) {
+   if(cluster.isWorker){
+             
+                    users = users.data
+          }
     let body = '';
 
   req.on('data', (chunk:Buffer) => {
@@ -23,25 +28,29 @@ export function servePostRequest(req: IncomingMessage,res: ServerResponse) {
         age: 0,
         hobbies: [],
       }
-      console.log('Request body:', userData);
+      
       if(isCorrectUserBodyFormat(userData)){
           let newUser = createNewUSer(newObj,userData)
           users.unshift(newUser);
+           if(cluster.isWorker){
+              
+            process.send && process.send({ type: 'sharedMemoryUpdate', data: users })
+          }
           console.log(users);
-          res.statusCode = 200;
+          res.statusCode = STATUS_CODE.OK;
           res.setHeader('Content-Type', 'application/json');
           return res.end(JSON.stringify({ message: 'User added successfully' }));
 
       }else{
-          res.statusCode = 400;
+          res.statusCode = STATUS_CODE.BAD_REQUEST;
           res.setHeader('Content-Type', 'application/json');
-          return res.end(JSON.stringify({ error: 'Invalid JSON data' }));
+          return res.end(JSON.stringify({ error: ERROR_MESSAGE.INVALID_DATA }));
           
         }
     } catch (error) {
         console.error('Error parsing request body:', error);
 
-      res.statusCode = 400;
+      res.statusCode = STATUS_CODE.BAD_REQUEST;
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({ error: 'Error' }));
     }

@@ -1,6 +1,6 @@
 
 
-export function updateUser(user, updatedUser) {
+export function updateUser(user:Record<string, any>, updatedUser:Record<string, any>) {
     
     user.username = updatedUser.username
     user.age = parseInt(updatedUser.age)

@@ -1,4 +1,4 @@
-import { DatabaseUser } from "../data/users"
+import { DatabaseUser } from "../data/usersStorageProccess"
 
 export function isCorrectUserBodyFormat(obj: DatabaseUser)  {
     if(typeof obj.username === 'string' && 
