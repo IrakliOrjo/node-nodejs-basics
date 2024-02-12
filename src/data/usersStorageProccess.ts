@@ -1,14 +1,8 @@
-import { randomUUID } from "crypto";
-
-
 export type DatabaseUser = {
-  userId?: string
-  username: string
-  age:number
-  hobbies: string[]
-}
+  userId?: string;
+  username: string;
+  age: number;
+  hobbies: string[];
+};
 
-export let users: DatabaseUser[] = [
- 
-];
-
+export let users: DatabaseUser[] = [];
