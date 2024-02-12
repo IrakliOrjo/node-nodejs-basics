@@ -1,43 +1,36 @@
 {
-  "name": "node-nodejs-basics",
+  "name": "crud-api",
   "version": "1.0.0",
-  "description": "This repository is the part of nodejs-assignments https://github.com/AlreadyBored/nodejs-assignments",
-  "engines": {
-    "node": ">=20.0.0"
-  },
-  "type": "module",
+  "description": "",
+  "main": "index.ts",
   "scripts": {
-    "cli:args": "node src/cli/args.js --some-arg value1 --other 1337 --arg2 42",
-    "cli:env": "npx cross-env SOME=any RSS_foo=bar RSS_bar=baz node src/cli/env.js",
-    "cp": "node src/cp/cp.js",
-    "fs:copy": "node src/fs/copy.js",
-    "fs:create": "node src/fs/create.js",
-    "fs:delete": "node src/fs/delete.js",
-    "fs:list": "node src/fs/list.js",
-    "fs:read": "node src/fs/read.js",
-    "fs:rename": "node src/fs/rename.js",
-    "hash": "node src/hash/calcHash.js",
-    "modules": "node src/modules/esm.mjs",
-    "streams:read": "node src/streams/read.js",
-    "streams:transform": "node src/streams/transform.js",
-    "streams:write": "node src/streams/write.js",
-    "wt": "node src/wt/main.js",
-    "zip:compress": "node src/zip/compress.js",
-    "zip:decompress": "node src/zip/decompress.js"
+    "start:dev": "npx ts-node-dev ./src/index",
+    "start:prod": "webpack --config ./webpack.config.js && node ./dist/bundle.js",
+    "start:multi": "npx ts-node ./src/multi"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AlreadyBored/node-nodejs-basics.git"
-  },
-  "keywords": [
-    "nodejs",
-    "assignments",
-    "alreadybored"
-  ],
-  "author": "alreadybored",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AlreadyBored/node-nodejs-basics/issues"
+  "devDependencies": {
+    "@types/node": "^20.11.17",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "cross-env": "^7.0.3",
+    "dotenv-webpack": "^8.0.1",
+    "eslint": "^8.56.0",
+    "nodemon": "^3.0.3",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
   },
-  "homepage": "https://github.com/AlreadyBored/node-nodejs-basics#readme"
+  "dependencies": {
+    "@types/uuid": "^9.0.8",
+    "dotenv": "^16.4.1",
+    "node-polyfill-webpack-plugin": "^3.0.0",
+    "uuid": "^9.0.1"
+  }
 }
